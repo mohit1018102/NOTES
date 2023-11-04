@@ -24,6 +24,12 @@ MySql is an relational database use to manage data efficiently. <br>
     * ROLLBACK
     * SAVEPOINT
   
+  ## DATA QUERY LANGUAGE : SELECT
+
+``` sql
+   SELECT * FROM TABLE;
+```
+  
 
 
 
