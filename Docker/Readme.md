@@ -70,6 +70,50 @@ Eg : An application required MongoDb and nodejs for an application.
 ### After Container
 **Dev team** creates a image ------> push to----> **Registery**  <------pulled by operation team and deploy.<br> 
 
+# DOCKER COMMANDS
+1. **Docker Pull** pull image to the local machine.
+  ```cmd
+  docker pull <image_name>
+  ```
+2. **Docker create** : create a container w/o starting it.
+  ```cmd
+    docker create <image_name>
+   ```
+3. **Docker Start:** start the container
+  ```cmd
+      docker start <image_name>
+  ```
+4. **Docker Stop:** start the container
+  ```cmd
+      docker stop <image_name>
+  ```
+    
+5. **Docker run --> creates and run Docker container** from image (**docker pull+docker create + docker start**)
+* creates container and run in normal mode ( close on exit)
+  ```cmd
+  docker run <image_name>
+  ```
+* creates and run image in dettach mode (you have to use Docker stop to stop the container)
+  ```cmd
+  docker run -d <image_name>
+  ```
+* naming of container
+  ```cmd
+  docker run --name mongodb mongo
+  ```
+* port configuration : we have to link container port to host port inorder to access container from host
+  ```cmd
+     docker run -d -p host_port:container_port --name <custom_name> <image_name>
+  ```
+* **Container Network**: Container inside same  network can be liked using container name.
+  ```cmd
+   docker network create <custom_network>
+   docker run -d -p host_port:container_port --name <custom_name> --net <custom_network>  <image_name>
+  ```
+**Note : -e Env_variable=xyz**
+  
+  
+
 
 
 
