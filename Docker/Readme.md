@@ -126,16 +126,24 @@ Eg : An application required MongoDb and nodejs for an application.
      ```
  8. list containers
     * list running containers 
-     ```cmd
+    ```cmd
         docker ps
-     ``
+     ```
      * list all containers 
      ```cmd
         docker ps -a
      ``
-  9. list all images
+  10. list all images
       ```cmd
           docker image ls
+      ```
+  11. remove container
+      ```cmd
+          docker remove <image_name/id>
+      ```
+12. remove image
+      ```cmd
+          docker rmi <image_name>
       ```
 # Docker-Compose
 Structured container commands for access.
