@@ -124,7 +124,19 @@ Eg : An application required MongoDb and nodejs for an application.
       ```cmd
        docker exec -it <cointainer_id/name> /bin/sh
      ```
-
+ 8. list containers
+    * list running containers 
+     ```cmd
+        docker ps
+     ``
+     * list all containers 
+     ```cmd
+        docker ps -a
+     ``
+  9. list all images
+      ```cmd
+          docker image ls
+      ```
 # Docker-Compose
 Structured container commands for access.
 
@@ -184,6 +196,37 @@ services:
 * **stop the containers**
   ```cmd
     docker-compose -f compose.yaml down 
+  ```
+
+  ## Building image from project
+  ### server.js
+  ```js
+        const http=require("http");
+        const host = 'localhost';
+        const port = 8000;
+        const requestListener = function (req, res) {
+              res.writeHead(200);
+              res.end("My first server 1.0!");
+         };
+
+        const server = http.createServer(requestListener);
+        server.listen(port, host, () => {
+            console.log(`Server is running on http://${host}:${port}`);
+        });
+  ```
+  ### Dockerfile
+  ```dockerfile
+    FROM node:13-alpine
+    ENV MONGO_DB_USERNAME=admin 
+    ENV MONGO_DB_PWD=password
+    RUN mkdir -p /home/project
+    COPY . /home/project
+    CMD ["node","/home/project/server.js"]
+  ```
+
+  ### commands to build
+  ```cmd
+     docker build -t my_app:1.0 .
   ```
 
   
