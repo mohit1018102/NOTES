@@ -132,7 +132,7 @@ Eg : An application required MongoDb and nodejs for an application.
      * list all containers 
      ```cmd
         docker ps -a
-     ``
+     ```
   10. list all images
       ```cmd
           docker image ls
