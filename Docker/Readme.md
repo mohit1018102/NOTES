@@ -112,8 +112,21 @@ Eg : An application required MongoDb and nodejs for an application.
   ```
 **Note : -e Env_variable=xyz**
 
-# Docker-Compose
+6. **docker logs** : to display log
+   ```cmd
+       docker logs <container_id/name>
+    ```
+7. To get **container terminal**
+     ```cmd
+       docker exec -it <cointainer_id/name> /bin/bash
+     ```
 
+      ```cmd
+       docker exec -it <cointainer_id/name> /bin/sh
+     ```
+
+# Docker-Compose
+Structured container commands for access.
 
 ### create a network
 ```cmd
@@ -139,9 +152,40 @@ docker run -d \
 -e ME_CONFIG_MONGODB_SERVER=mongodb \
 --net mongo-network \
 -- name mongo-express \
--e ME_CONFIG_MONGODB_SERVER=mongodb \
 mongo-express
 ```
+
+### compose.yaml : will create seperate network by default using project name
+```yaml
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    ports:
+    - 27017:27017
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=admin
+    - MONGO_INITDB_ROOT_PASSWORD=password
+  mongo-express:
+    image: mongo-express
+    ports:
+    - 8080:8081
+    environment:
+    - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+    - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+    - ME_CONFIG_MONGODB_SERVER=mongodb
+```
+
+### command to use compose.yaml
+* **start the containers**
+  ```cmd
+    docker-compose -f compose.yaml up -d
+  ```
+* **stop the containers**
+  ```cmd
+    docker-compose -f compose.yaml down 
+  ```
+
   
 
 
