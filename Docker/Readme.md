@@ -244,21 +244,23 @@ services:
 **NOTE : Setup IAM account for secret key**<br>
 EG:
 ```cli
->> aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 924514355101.dkr.ecr.us-east-1.amazonaws.com
->> docker tag my_app:latest 924514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
->> docker push 924514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
+>> aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 9514355101.dkr.ecr.us-east-1.amazonaws.com
+>> docker tag my_app:latest 9514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
+>> docker push 9514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
 ```
 **you can push multiple version to the repo**
 
 
 ### Image Naming in Docker Registry
 #### registryDomain/Image_Tag:tag
+
+### DockerHub : can ignore domain name
 ```cmd
 docker pull mongo:4.2
 expanded version:
 docker pull docker.io/library/mongo:4.2
 ```
-### pull
+### Aws Ecr pull : we can't skip domain name
 ```cmd
  docker pull 924514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
 ```
@@ -266,6 +268,37 @@ in our case:
 * **registryDomain:** 924514355101.dkr.ecr.us-east-1.amazonaws.com
 * **Image_Tag:** my_app
 * **Tag:** latest
+
+
+# Deployment in server
+**Given : my_app, Mogodb,Mongo-express image**
+#### create a compose file to include all image.
+
+```yaml
+version: '3'
+services:
+  my_app:
+    image: 9514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
+    ports:
+        - 3000:3000
+  mongodb:
+    image: mongo
+    ports:
+    - 27017:27017
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=admin
+    - MONGO_INITDB_ROOT_PASSWORD=password
+  mongo-express:
+    image: mongo-express
+    ports:
+    - 8080:8081
+    environment:
+    - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+    - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+    - ME_CONFIG_MONGODB_SERVER=mongodb
+```
+* **run compose commands**
+
 
   
 
