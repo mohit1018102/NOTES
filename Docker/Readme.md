@@ -249,10 +249,23 @@ EG:
 >> docker push 924514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
 ```
 **you can push multiple version to the repo**
+
+
+### Image Naming in Docker Registry
+#### registryDomain/Image_Tag:tag
+```cmd
+docker pull mongo:4.2
+expanded version:
+docker pull docker.io/library/mongo:4.2
+```
 ### pull
 ```cmd
  docker pull 924514355101.dkr.ecr.us-east-1.amazonaws.com/my_app:latest
 ```
+in our case:
+* **registryDomain:** 924514355101.dkr.ecr.us-east-1.amazonaws.com
+* **Image_Tag:** my_app
+* **Tag:** latest
 
   
 
