@@ -197,11 +197,11 @@ services:
 ```
 
 ### command to use compose.yaml
-* **start the containers**
+* **create and run the containers**
   ```cmd
     docker-compose -f compose.yaml up -d
   ```
-* **stop the containers**
+* **stop and remove the containers**
   ```cmd
     docker-compose -f compose.yaml down 
   ```
@@ -298,6 +298,50 @@ services:
     - ME_CONFIG_MONGODB_SERVER=mongodb
 ```
 * **run compose commands**
+
+# Volumes
+1. volumes is use to presist data of Docker.
+2. Map docker filesytem to Physical host file system for persistance.
+
+* **3 Types**
+  ```cmd
+    docker run
+                -v host_location: docker_location
+                -v docker_location    <--- Anonymous voulume (no name some random named folder)
+                -v name:docker_location <-----Named location
+  ```
+**Location**
+* **For windows :** c:\programData\docker\voulmes
+* **Linux/mac :** /var/lib/docker/volumes
+
+compose.yaml
+```yaml
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    ports:
+    - 27017:27017
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=admin
+    - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+    - mongo_data:/data/db                            <- to a particular container
+  mongo-express:
+    image: mongo-express
+    ports:
+    - 8080:8081
+    environment:
+    - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+    - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+    - ME_CONFIG_MONGODB_SERVER=mongodb
+volumes:                                              <----- accessed by all containers(shared)
+  mongo_data:
+    driver: local                                     <----- local means local host machine
+```
+
+**Now, data persist at location : c:\programData\docker\voulmes.**
+
 
 
   
