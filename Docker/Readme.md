@@ -240,8 +240,8 @@ services:
 # Using AWS ECR : Elastic Container Registery : Private repo to push images
 1. go to **Aws > ECR> get started > create repository** 
 2. open repo > **VIEW PUSH COMMAND**
-3. install amazoncli and amazon configure
-
+3. install **amazoncli** and amazon configure<br>
+**NOTE : Setup IAM account for secret key**<br>
 EG:
 ```cli
 >> aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 924514355101.dkr.ecr.us-east-1.amazonaws.com
